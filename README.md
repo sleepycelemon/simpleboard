@@ -2,6 +2,14 @@
 
 _simpleboard is a webapp where you can add notes and reactions to a notice board_
 
+## To run
+
+- pre-requisites
+    - a nodejs installation (e.g. 20.13, which is what the project was developed with)
+
+- run `npm install` in the root of the repository
+- run `npm run start` and navigate to `localhost:3000`
+
 ## Todo
 
 - Create canvas - done
