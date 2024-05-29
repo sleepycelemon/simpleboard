@@ -15,6 +15,8 @@ const StyledEmojiPicker = styled.div`
   border-radius: 15px;
 
   box-shadow: -8px 8px 5px 0px rgba(0,0,0,0.75);
+
+  position: absolute;
 `;
 
 const StyledEmojis = styled.div`
@@ -42,19 +44,26 @@ const StyledMessageInput = styled.input`
 const emojiReactions = ["😀", "😍", "😂", "😢", "😡", "👍"];
 
 type Props = {
-  addEmoji: () => void,
+  addEmoji: (emoji: string, comment: string) => void,
+  close: () => void,
+  position: { x: number, y: number }
 }
 
-export default function EmojiPicker(props: Props) {
-
+export default function EmojiPicker({ close, position, addEmoji }: Props) {
   const [commentText, setCommentText] = useState<string>("");
 
+  const select = (emoji: string) => {
+    addEmoji(emoji, commentText);
+    close();
+    setCommentText("");
+  }
+
   return (
-    <StyledEmojiPicker>
+    <StyledEmojiPicker style={{ top: position.y, left: position.x }}>
       <StyledEmojis>
-        {emojiReactions.map(emoji => <StyledEmoji>{emoji}</StyledEmoji>)}
+        {emojiReactions.map(emoji => <StyledEmoji onClick={() => select(emoji)} key={emoji}>{emoji}</StyledEmoji>)}
         <StyledClose>
-          <X size={36} />
+          <X size={36} onClick={close} />
         </StyledClose>
       </StyledEmojis>
       <StyledMessageInput value={commentText} onChange={e => setCommentText(e.target.value)} placeholder="Add a comment" />

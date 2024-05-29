@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { styled } from "styled-components";
 import AddButton from "./components/add-button";
+import Emoji from "./components/emoji";
 import EmojiPicker from "./components/emoji-picker";
 import Note from "./components/note";
-import { NoteType } from "./types";
+import { EmojiType, NoteType } from "./types";
 
 const Wrap = styled.section`
   height: 100vh;
@@ -12,6 +13,7 @@ const Wrap = styled.section`
   display: flex;
   padding: 16px;
   gap: 24px;
+  position: relative;
 `;
 
 
@@ -24,6 +26,11 @@ export default function Canvas() {
 
   const [noteCount, setNoteCount] = useState<number>(0);
   const [notes, setNotes] = useState<Notes>({});
+  const [emojis, setEmojis] = useState<EmojiType[]>([])
+
+  // TODO: make this a custom hook
+  const [pickerPosition, setPickerPosition] = useState({ x: 0, y: 0 })
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const addNewNote = () => {
 
@@ -45,18 +52,28 @@ export default function Canvas() {
     updated[idx] = { ...updated[idx], text };
 
     setNotes(updated);
-
   }
 
-  const addEmoji = () => {
-    
+  const addEmoji = (emoji: string, text: string) => {
+    setEmojis(curr => [...curr, { emoji, text, position: pickerPosition }])
+  }
+
+  const openEmojiPicker: MouseEventHandler = (e) => {
+    setPickerPosition({ x: e.clientX, y: e.clientY })
+    setShowEmojiPicker(true);
+  }
+
+
+  const closeEmojiPicker = () => {
+    setShowEmojiPicker(false);
   }
 
   return (
-    <Wrap>
+    <Wrap onDoubleClick={openEmojiPicker}>
       {Object.values(notes).map(note => <Note key={note.idx} note={note} setText={setNoteText} />)}
       <AddButton addNewNote={addNewNote} />
-      <EmojiPicker addEmoji={addEmoji} />
+      {showEmojiPicker && (<EmojiPicker position={pickerPosition} addEmoji={addEmoji} close={closeEmojiPicker} />)}
+      {emojis.map(emoji => (<Emoji emoji={emoji} />))}
     </Wrap>
   )
 } 
