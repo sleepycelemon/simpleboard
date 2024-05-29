@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import AddButton from "./components/add-button";
+import EmojiPicker from "./components/emoji-picker";
 import Note from "./components/note";
 import { NoteType } from "./types";
 
@@ -47,10 +48,15 @@ export default function Canvas() {
 
   }
 
+  const addEmoji = () => {
+    
+  }
+
   return (
     <Wrap>
       {Object.values(notes).map(note => <Note key={note.idx} note={note} setText={setNoteText} />)}
       <AddButton addNewNote={addNewNote} />
+      <EmojiPicker addEmoji={addEmoji} />
     </Wrap>
   )
 } 
