@@ -12,7 +12,8 @@ const StyledAddButton = styled.button`
   color: white;
   display: flex;
   justify-content: center;
-  border: 1px solid white;
+  border: 4px solid white;
+  box-shadow: -8px 8px 5px 0px rgba(0,0,0,0.75);
 `;
 
 type Props = {

@@ -10,6 +10,7 @@ const Wrap = styled.section`
   background-color: slateblue;
   display: flex;
   padding: 16px;
+  gap: 24px;
 `;
 
 
@@ -32,9 +33,23 @@ export default function Canvas() {
     setNotes(curr => ({ ...curr, ...{ [newNoteCount]: newNote } }))
   }
 
+  const setNoteText = (text: string, idx: number) => {
+    const updated = { ...notes };
+
+    // Should never happen but we should check anyway.
+    if (!updated[idx]) {
+      return;
+    }
+
+    updated[idx] = { ...updated[idx], text };
+
+    setNotes(updated);
+
+  }
+
   return (
     <Wrap>
-      {Object.values(notes).map(note => <Note note={note} />)}
+      {Object.values(notes).map(note => <Note key={note.idx} note={note} setText={setNoteText} />)}
       <AddButton addNewNote={addNewNote} />
     </Wrap>
   )
