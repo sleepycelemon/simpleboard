@@ -14,6 +14,7 @@ const Wrap = styled.section`
   padding: 16px;
   gap: 24px;
   position: relative;
+  flex-wrap: wrap;
 `;
 
 

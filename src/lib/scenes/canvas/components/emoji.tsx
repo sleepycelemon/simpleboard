@@ -8,21 +8,29 @@ const StyledEmoji = styled.div`
   cursor: pointer;
 `;
 
-const StyledComment = styled.div`
+
+const EmojiToolbar = styled.div` 
   background-color: white;
-  padding: 8px 16px;
   font-size: 16px;
   border-radius: 25px;
   box-shadow: -8px 8px 5px 0px rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px; 
 `;
 
 export default function Emoji({ emoji }: { emoji: EmojiType }) {
-  const [showComment, setShowComment] = useState(false);
+  const [showToolbar, setShowToolbar] = useState(false);
 
   return (
-    <StyledEmoji onMouseOver={() => setShowComment(true)} onMouseLeave={() => setShowComment(false)} style={{ top: emoji.position.y, left: emoji.position.x }}>
+    <StyledEmoji onMouseOver={() => setShowToolbar(true)} onMouseLeave={() => setShowToolbar(false)} style={{ top: emoji.position.y, left: emoji.position.x }}>
       {emoji.emoji}
-      {showComment && emoji.text && <StyledComment>{emoji.text}</StyledComment>}
+      {showToolbar && emoji.text && (
+        <EmojiToolbar>
+          {emoji.text}
+        </EmojiToolbar>
+      )}
     </StyledEmoji>
   )
 }

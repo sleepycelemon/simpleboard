@@ -8,10 +8,10 @@ _simpleboard is a webapp where you can add notes and reactions to a notice board
 - Create button to add new note to canvas - done
 - Add text to note by clicking edit button - done 
 - Created emoji picker and text input - done
-- Open emoji picker on double click
-- Click emoji to add to canvas (at mouse location)
-- Add input box to emoji picker which lets you add an additional message
-- Add hover state to emojis that shows the message entered
+- Open emoji picker on double click - done
+- Click emoji to add to canvas (at mouse location) - done
+- Add input box to emoji picker which lets you add an additional message - done
+- Add hover state to emojis that shows the message entered - done
 - Add delete button to emoji hover state
 - Ability to drag note
 - Ability to delete note
