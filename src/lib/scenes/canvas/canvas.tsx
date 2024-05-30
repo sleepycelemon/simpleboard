@@ -23,10 +23,15 @@ type Notes = {
   [idx: number]: NoteType,
 }
 
+const instructionNote = {
+  idx: -10,
+  text: "Click + to add a new note. Double click anywhere on the canvas to add a reaction."
+}
+
 export default function Canvas() {
 
   const [noteCount, setNoteCount] = useState<number>(0);
-  const [notes, setNotes] = useState<Notes>({});
+  const [notes, setNotes] = useState<Notes>({ [-10]: instructionNote });
   const [emojis, setEmojis] = useState<EmojiType[]>([])
 
   // TODO: make this a custom hook
